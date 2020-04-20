@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cyberpunk_ccg_archive.urls import urlpatterns as cyberpunk_urlpatterns
+from authentication.urls import urlpatterns as authentication_urlpatterns
 
 
 urlpatterns = [
@@ -23,3 +24,4 @@ urlpatterns = [
 ]
 
 urlpatterns += cyberpunk_urlpatterns
+urlpatterns += authentication_urlpatterns
