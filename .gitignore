@@ -100,3 +100,20 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+.idea/.gitignore
+.idea/capstone.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/sonarlint/
+.idea/vcs.xml
+Pipfile.lock
+templates/
+~/
+!/templates/
+
+authentication/__pycache__/
+
+ccg_archive/__pycache__/
+
+cyberpunk_ccg_archive/__pycache__/
