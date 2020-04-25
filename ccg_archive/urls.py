@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cyberpunk_ccg_archive.urls import urlpatterns as cyberpunk_urlpatterns
-from authentication.urls import urlpatterns as authentication_urlpatterns
+from ccg_archive.cyberpunk_ccg_archive.urls import urlpatterns as cyberpunk_urlpatterns
+from ccg_archive.authentication.urls import urlpatterns as authentication_urlpatterns
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
 ]
 
 urlpatterns += cyberpunk_urlpatterns

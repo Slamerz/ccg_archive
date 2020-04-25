@@ -15,9 +15,9 @@ Including another URLconf
 """
 
 from django.urls import path
-from cyberpunk_ccg_archive import views
-
+from ccg_archive.cyberpunk_ccg_archive import views
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name="homepage")
+    path('', views.IndexView.as_view(), name="homepage"),
+    path('sponsor/', views.SubmitSponsorView.as_view(), name='sponsor')
 ]

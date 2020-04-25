@@ -112,8 +112,10 @@ templates/
 ~/
 !/templates/
 
-authentication/__pycache__/
+ccg_archive/authentication/__pycache__/
 
 ccg_archive/__pycache__/
 
-cyberpunk_ccg_archive/__pycache__/
+ccg_archive/cyberpunk_ccg_archive/__pycache__/
+
+ccg_archive/cyberpunk_ccg_archive/migrations/__pycache__/
