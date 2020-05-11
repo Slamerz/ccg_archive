@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-</head>
-<body>
-<h1>This is just a filler page</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    CCG Archive
+{% endblock %}
+
+{% block content %}
+<div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        The Collectible Card Game Archive
+      </h1>
+      <h2 class="content box">
+          Every single hour, a card from a forgotten game is lost.
+          <br/>
+          While some cards are rescued each year, for hundreds of others, help comes too late...
+          <br/>
+          Hi, we're the CCG Archive, will you be an angel for an old collectible card game?
+          <br/>
+          Every day innocent Collectible Cards are abused, beaten, and neglected. And they are crying out for help.
+          <br/>
+          Please submit scans of your cards on the website on screen
+          <br/>
+          And join the CCG archive Community and you will help to provide these cards with a safe shelter,
+          so that no card game is lost to time and forgotten again.
+          <br/>
+          <br/>
+          Right now there is a card who needs uploaded by you. Your submission says I'm here to help.
+          <br/>
+          <a href={% url 'createcard' %}>
+              <button class="button is-primary" >
+                  Submit a card
+              </button>
+          </a>
+      </h2>
+    </div>
+  </div>
+{% endblock %}
+

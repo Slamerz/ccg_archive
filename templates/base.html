@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/lux/bulmaswatch.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<section class="hero is-fullheight">
+    <section class="hero-head">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href={% url 'homepage' %}>
+                  {% load static %}
+                    <img src="{% static "logo.png" %}"  height="128" width="100" class="media" alt="logo">
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasic" class="navbar-menu">
+                <div class="navbar-start">
+                  <a class="navbar-item" href={% url 'homepage' %}>
+                    Home
+                  </a>
+                  <a class="navbar-item" href={% url 'cardlist' %}>
+                    Cards
+                  </a>
+                    <a class="navbar-item" href={% url 'decklist' %}>
+                      Decks
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="buttons">
+                        {% if user.is_authenticated %}
+                            <div class="button is-primary navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    Account
+                                </a>
+                                <div class="navbar-dropdown">
+                                    <a class="navbar-item" href={% url 'user' pk=user.pk %}>
+                                        View Profile
+                                    </a>
+                                    <a class="navbar-item" href={% url 'edituser' %}>
+                                        Edit Account
+                                    </a>
+                                    {% if request.user.is_staff %}
+                                        <a class="navbar-item" href={% url 'approve' %} >
+                                            Staff Page
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <a class="button is-light navbar-item" href={% url 'logout' %}>
+                                Logout
+                            </a>
+                        {% else %}
+                            <a class="button is-primary navbar-item" href={% url 'registeruser' %}>
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light navbar-item" href={% url 'login' %}>
+                                Log in
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section class="container is-flex is-fluid">
+        {% block content %}
+        {% endblock %}
+    </section>
+</section>
+
+</body>
+</html>

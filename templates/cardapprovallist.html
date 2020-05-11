@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}
+Staff
+{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="panel">
+            <p class="panel-heading">
+                Needing Approval
+            </p>
+            {% if page_obj.has_other_pages %}
+                <nav class="pagination panel-block" role="navigation" aria-label="pagination">
+                {% if page_obj.has_previous %}
+                    <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">
+                        Previous
+                    </a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">
+                    Next page
+                </a>
+                {% endif %}
+                <ul class="pagination-list">
+                    {% if page_obj.has_previous %}
+                        <li>
+                          <a class="pagination-link" aria-label="Goto page 1" href="?page=1">
+                              1
+                          </a>
+                        </li>
+                        {% if page_obj.previous_page_number != 1 %}
+                            <li>
+                              <span class="pagination-ellipsis">&hellip;</span>
+                            </li>
+                            <li>
+                              <a class="pagination-link" aria-label="Goto page {{ page_obj.previous_page_number }}"
+                                href="?page={{ page_obj.previous_page_number  }}">
+                                  {{ page_obj.previous_page_number }}
+                              </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    <li>
+                      <a aria-current="page" aria-label="Page {{ page_obj.current_page_number }}"
+                         class="pagination-link is-current">
+                          {{ page_obj.current_page_number }}
+                      </a>
+                    </li>
+                    {% if page_obj.has_next %}
+                        {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+                            <li>
+                              <a class="pagination-link" aria-label="Goto page {{ page_obj.next_page_number }}"
+                              href="?page={{ page_obj.next_page_number }}">
+                                  {{ page_obj.next_page_number }}
+                              </a>
+                            </li>
+                            <li>
+                              <span class="pagination-ellipsis">&hellip;</span>
+                            </li>
+                        {% endif %}
+                    <li>
+                      <a class="pagination-link" aria-label="Goto page {{ page_obj.paginator.num_pages }}"
+                      href="?page={{ page_obj.paginator.num_pages }}">
+                          {{ page_obj.paginator.num_pages }}
+                      </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            <div class="panel-block">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th><abbr title="Faction">Fac</abbr></th>
+                            <th>cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for card in object_list %}
+                                <tr>
+                                    <th>
+                                        <a class="is-link" href={% url 'card' pk=card.pk %}>
+                                            {{ card.name }}
+                                        </a>
+                                    </th>
+                                    <td>{{ card.faction }}</td>
+                                    <td>{{ card.cost }}</td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

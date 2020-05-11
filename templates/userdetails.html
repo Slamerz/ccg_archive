@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                            <img class="fas fa-grin-beam fa-3x" alt="profile"/>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">{{ object.username }}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <br>
+                    <p>Member Since: {{ object.date_joined }}</p>
+                </div>
+            </div>
+            {% if User is object.user %}
+                <div class="card-footer">
+                    <div>
+                        <a href={% url 'edituser' %} class="card-footer-item">Edit</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <nav class="panel">
+            <p class="panel-heading">
+                Cards Submitted!
+            </p>
+            {% for card in card_list %}
+                <a class="panel-block" href={% url 'card' pk=card.pk %}>
+                    <span class="panel-icon">
+                      <i class="fas fa-angle-right"></i>
+                    </span>
+                    {{ card.name }} - submitted on: {{ card.date_submitted }}
+                </a>
+            {% endfor %}
+        </nav>
+    </div>
+    <div class="container">
+        <nav class="panel">
+            <p class="panel-heading">
+                Deck List
+            </p>
+            {% for deck in deck_list %}
+                <a class="panel-block" href={% url 'deck' pk=deck.pk %}>
+                    <span class="panel-icon">
+                      <i class="fas fa-angle-right"></i>
+                    </span>
+                    {{ deck.name }} - submitted on: {{ deck.date_submitted }}
+                </a>
+            {% endfor %}
+        </nav>
+    </div>
+
+
+{% endblock %}

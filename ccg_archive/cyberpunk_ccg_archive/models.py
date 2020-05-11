@@ -5,9 +5,11 @@ from django.db import models
 
 
 class Card(models.Model):
+    FACTIONS = [('G', 'Government'), ('C', 'Corporate'), ('S', 'Street'), ('N', 'None')]
+
     name = models.CharField(max_length=50)
     faction = models.CharField(
-        choices=[('G', 'Government'), ('C', 'Corporate'), ('S', 'Street'), ('N', 'None')],
+        choices=FACTIONS,
         max_length=50)
     cost = models.IntegerField(default=0, blank=True, null=True)
     abilities = models.CharField(max_length=150)
@@ -15,6 +17,9 @@ class Card(models.Model):
     date_submitted = models.DateTimeField(auto_now_add=True, blank=True)
     approved = models.BooleanField(default=False, blank=True)
     submitted_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def faction_verbose(self):
+        return dict(Card.FACTIONS)[self.faction]
 
     def __str__(self):
         return self.name
@@ -35,7 +40,7 @@ class Location(Card):
 
 class Image(models.Model):
     image = models.ImageField(upload_to='./cards')
-    approved = models.BooleanField(default=False, blank=True)
+    approved = models.BooleanField(default=True, blank=True)
     submitted_by = models.ForeignKey(User, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
 
@@ -43,40 +48,12 @@ class Image(models.Model):
         return self.card.name
 
 
+class Deck(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=500, blank=True)
+    cards = models.ManyToManyField(Card, limit_choices_to={'approved': True}, blank=True)
+    date_submitted = models.DateTimeField(auto_now_add=True, blank=True)
+    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
-# class Operation(Card):
-#     manual_security = models.IntegerField(default=0)
-#     electronic_security = models.IntegerField(default=0)
-#     ops_points = models.IntegerField(default=0)
-#     attributes = models.CharField(max_length=150)
-#
-#
-# class Runner(Card):
-#     short_range = models.IntegerField(default=0)
-#     long_range = models.IntegerField(default=0)
-#     defense = models.IntegerField(default=0)
-#     power = models.IntegerField(default=0)
-#     attributes = models.CharField(max_length=150)
-#     style_points = models.IntegerField(default=0)
-#
-#
-# class Equipment(Card):
-#     short_range = models.IntegerField(default=0)
-#     long_range = models.IntegerField(default=0)
-#     defense = models.IntegerField(default=0)
-#     attributes = models.CharField(max_length=150)
-#     style_points = models.IntegerField(default=0)
-#
-#
-# class Cyber(Equipment):
-#     empathy_loss = models.IntegerField(default=0)
-#
-#
-# class Event(Card):
-#     phase = models.CharField(
-#         choices=['Draw',
-#                  'Straighten',
-#                  'Shopping',
-#                  'Legwork',
-#                  'Action',
-#                  'Damage Control'])
+    def __str__(self):
+        return f'{self.name} by {self.submitted_by}'

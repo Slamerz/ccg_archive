@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ object.name}}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel">
+            <p class="panel-heading">
+                {{ object.name }} by {{ object.submitted_by }}
+            </p>
+           <div class="panel-block">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th><abbr title="Faction">Fac</abbr></th>
+                            <th>cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for card in object.cards.all %}
+                                <tr>
+                                    <th>
+                                        <a class="is-link" href={% url 'card' pk=card.pk %}>
+                                            {{ card.name }}
+                                        </a>
+                                    </th>
+                                    <td>{{ card.faction }}</td>
+                                    <td>{{ card.cost }}</td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-block has-background-grey-lighter">
+                Description: <br/>
+                {{ object.description }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

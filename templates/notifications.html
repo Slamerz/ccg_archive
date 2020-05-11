@@ -1,0 +1,22 @@
+<div>
+<h1>Notifications</h1>
+    {% if cardNotifications %}
+
+        <ul>
+            {% for notification in cardNotifications %}
+                <a href=""><li>{{ notification.card.name }} </li></a>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if imageNotifications %}
+        <ul>
+            {% for notification in imageNotifications %}
+                <li>Your submission of an image for {{ notification.Card.name }} was {% if notification.Card.approved %}
+                approved
+                    {% else %}
+                    denied
+                {% endif %} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

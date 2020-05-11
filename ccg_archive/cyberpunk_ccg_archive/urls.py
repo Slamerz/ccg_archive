@@ -19,5 +19,14 @@ from ccg_archive.cyberpunk_ccg_archive import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name="homepage"),
-    path('sponsor/', views.SubmitSponsorView.as_view(), name='sponsor')
+    path('sponsor/', views.SubmitSponsorView.as_view(), name='sponsor'),
+    path('user/<int:pk>', views.UserDetailView.as_view(), name='user'),
+    path('card/submit/', views.SubmitSponsorView.as_view(), name='createcard'),
+    path('cards/', views.CardListView.as_view(), name='cardlist'),
+    path('card/<int:pk>', views.CardDetailView.as_view(), name='card'),
+    path('card/<int:pk>/edit', views.CardUpdateView.as_view(), name='editcard'),
+    path('staff/', views.CardApprovalView.as_view(), name="approve"),
+    path('deck/submit/', views.SubmitDeckView.as_view(), name='createdeck'),
+    path('decks/', views.DeckListView.as_view(), name='decklist'),
+    path('deck/<int:pk>/', views.DeckDetailView.as_view(), name='deck')
 ]

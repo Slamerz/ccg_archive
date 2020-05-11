@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ccg_archive.cyberpunk_ccg_archive.apps.CyberpunkCcgArchiveConfig',
     'ccg_archive.authentication',
-    'ccg_archive.notifications'
 ]
 
 MIDDLEWARE = [

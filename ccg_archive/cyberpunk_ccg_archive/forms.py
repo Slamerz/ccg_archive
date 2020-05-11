@@ -17,6 +17,19 @@ class SponsorCardForm(forms.ModelForm):
     image = forms.ImageField()
 
 
+class DeckForm(forms.ModelForm):
+    class Meta:
+        model = models.Deck
+        fields = [
+            'name',
+            'description',
+            'cards'
+        ]
+        widgets = {
+            'cards': forms.CheckboxSelectMultiple()
+        }
+
+
 class LocationCardForm(forms.ModelForm):
     class Meta:
         model = models.Location

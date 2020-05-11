@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ object.name }}
+{% endblock %}
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <div class="card">
+                <div class="card-header-title">
+                    {{ object.name }}
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        faction: {{ object.faction_verbose }} | cost: {{ object.cost}}
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <p >Abilities: {{ object.abilities }}</p>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <em>{{ object.flavor }}</em>
+                    </div>
+                </div>
+                {% if request.user.is_staff %}
+                    <a href={% url 'editcard' pk=object.pk %}>
+                        <button class="button">Edit</button>
+                    </a>
+                {% endif %}
+                <div class="card-footer">
+                    Submitted by: {{ object.submitted_by }}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            {% for card_image in card_images %}
+                <figure class="image">
+                    <img src="{{card_image.image.url}}" alt="card image"/>
+                </figure>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

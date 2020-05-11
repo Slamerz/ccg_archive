@@ -3,6 +3,8 @@ from ccg_archive.cyberpunk_ccg_archive import models
 
 # Register your models here.
 
+admin.site.register(models.Card)
 admin.site.register(models.Location)
 admin.site.register(models.Sponsor)
 admin.site.register(models.Image)
+admin.site.register(models.Deck)

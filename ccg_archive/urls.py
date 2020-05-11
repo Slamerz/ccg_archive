@@ -13,15 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+
+from ccg_archive import settings
 from ccg_archive.cyberpunk_ccg_archive.urls import urlpatterns as cyberpunk_urlpatterns
 from ccg_archive.authentication.urls import urlpatterns as authentication_urlpatterns
-
+from ccg_archive.cyberpunk_ccg_archive import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin.site.urls, name='admin')
 ]
+handler404 = views.handler404
+handler500 = views.handler500
 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += cyberpunk_urlpatterns
 urlpatterns += authentication_urlpatterns
