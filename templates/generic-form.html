@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Form</title>
-</head>
-<body>
-<form action="" method="post" enctype="multipart/form-data">
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<form action="" class="is-flexible container-fluid" method="post" enctype="multipart/form-data">
   {% csrf_token %}
-    {{ form.as_p }}
-  <input type="submit" value="Submit" />
+    <div class="is-horizontal">
+    {{ form|bulma }}
+    </div>
+    <div>
+        <button type="submit" class="button is-primary">Submit</button>
+        <a href={% url 'homepage' %}>
+            <button type="button" class="button is-light">Cancel</button>
+        </a>
+    </div>
 </form>
-{% if allow_register %}
-    <a href={% url "registeruser" %}><button>Register</button></a>
-{% endif %}
-</body>
-</html>
+{% endblock %}

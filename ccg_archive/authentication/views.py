@@ -5,8 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView
-from ccg_archive.authentication.forms import RegisterUserForm
+from django.views.generic import CreateView, UpdateView
+from ccg_archive.authentication.forms import RegisterUserForm, EditUserForm
 
 
 class LoginUserView(LoginView):
@@ -47,5 +47,17 @@ class RegisterUserView(CreateView):
 
         login(self.request, user)
         return HttpResponseRedirect(reverse_lazy('homepage'))
+
+
+@method_decorator(login_required, name='dispatch')
+class UserEditView(UpdateView):
+    template_name = 'generic-form.html'
+    form_class = EditUserForm
+    model = User
+    success_url = reverse_lazy('homepage')
+
+    def get_object(self, queryset=None):
+        return User.objects.get(pk=self.request.user.pk)
+
 
 
