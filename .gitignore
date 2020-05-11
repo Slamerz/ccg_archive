@@ -119,3 +119,7 @@ ccg_archive/__pycache__/
 ccg_archive/cyberpunk_ccg_archive/__pycache__/
 
 ccg_archive/cyberpunk_ccg_archive/migrations/__pycache__/
+
+ccg_archive/.env
+
+.idea/
